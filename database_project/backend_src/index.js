@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // กำหนด route ที่จะใช้ 
-app.use('/api/users', require('./routes/api/users.js'));
+app.use('/api', require('./routes/api/api.js'));
 
 
 // Listen on a port

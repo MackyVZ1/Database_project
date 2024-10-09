@@ -22,10 +22,7 @@ db.connect((err) =>{
 
 // Create your endpoints/route handlers
 
-// ----------- API -------------
-// 1 API = 1 route (การทำงาน)
-// ส่งข้อมูลไปให้หน้าบ้ายด้วย JSON ; ในทีนี้คือตัวแปรชื่อ results
-
+// ---------- API สำหรับทำข้อมูล user --------
 // เรียกดูข้อมูลผู้ใช้งานทั้งหมด
 router.get('/userList', (req, res) => {
     db.query("SELECT * FROM userInfo", (err, results) =>{
@@ -131,6 +128,83 @@ router.put('/userList/:username/updateProfile', (req, res) => {
         valuesUpdate.push(updateProfile.birthdate);
     }
 
-
+    // ตรวจสอบว่ามีการอัพเดทข้อมูล
+    if(columnsUpdate.length > 0){
+        valuesUpdate.push(req.params.username)
+        db.query(`UPDATE userInfo SET ${columnsUpdate.join(',')} WHERE username = ?`, valuesUpdate, (err, results) =>{
+            // ถ้าเกิด error ขึ้น
+            if(err){
+                res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถอัพเดทข้อมูลได้"});
+            }
+            // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+            res.json(results);
+            })
+    }
 })
+
+// เปลี่ยนรหัสผ่าน
+router.put('/resetpassword', (req, res) =>{
+    const newPassword = {
+        username: req.body.username,
+        newpassword: req.body.newpassword
+    }
+    db.query("UPDATE userInfo SET password = ? WHERE username = ?", [newPassword.newpassword, newPassword.username], (err, results) => {
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถรีเซตรหัสผ่านได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+
+// ---------- API สำหรับเรียกดูข้อมูลจาก dataset --------
+// เรียกดูข้อมูลโควิด; ระบุระลอก
+router.get('/:covidInfo', (req, res) => {
+    db.query(`SELECT * FROM ${req.params.covidInfo}`, (err, results) => {
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอกดังกล่าวได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+
+// เรียกดูข้อมูลโควิด; ระบุระลอกและปี
+router.get('/:covidInfo/:year', (req, res) => {
+    db.query(`SELECT * FROM ${req.params.covidInfo} WHERE year = ${req.params.year}`, (err, results) => {
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: `ฐานข้อมูลขัดข้อง, ไม่มีข้อมูล ${req.params.covidInfo} ปี ${req.params.year}`});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+
+// เรียกดูข้อมูลโควิด; ระบุระลอกและปีและอาทิตย์
+router.get('/:covidInfo/:year/:weeknum', (req, res) => {
+        db.query(`SELECT * FROM ${req.params.covidInfo} WHERE year = ${req.params.year} AND weeknum = ${req.params.weeknum}`, (err, results) => {
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: `ฐานข้อมูลขัดข้อง, ไม่มีข้อมูล ${req.params.covidInfo} ปี ${req.params.year} อาทิตย์ที่ ${req.params.weeknum}`});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+
+// เรียกดูข้อมูลโควิดตามพื้นที่
+router.get('/:covidProvince', (req, res) => {
+        db.query(`SELECT * FROM ${req.params.covidProvince}`, (err, results) => {
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอกดังกล่าวได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+
 module.exports = router;
