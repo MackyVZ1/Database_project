@@ -22,39 +22,67 @@ db.connect((err) =>{
 
 // Create your endpoints/route handlers
 
-// API ; 1 API = 1 route (การทำงาน)
+// ----------- API -------------
+// 1 API = 1 route (การทำงาน)
+// ส่งข้อมูลไปให้หน้าบ้ายด้วย JSON ; ในทีนี้คือตัวแปรชื่อ results
+
 // เรียกดูข้อมูลผู้ใช้งานทั้งหมด
 router.get('/userList', (req, res) => {
     db.query("SELECT * FROM userInfo", (err, results) =>{
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกใช้ข้อมูลผู้ใช้ทั้งหมด"});
+        }
+        // ส่งข้อมูลกลับเป็น .JSON ; เอา results ไปใช้ต่อเลย
         res.json(results);
     });
 });
 
-// เรียกดูข้อมูลใช้งาน; Profile
+// เรียกดูข้อมูลผู้ใช้งานด้วยชื่อ
 router.get('/userList/:username', (req, res) =>{
     db.query("SELECT * FROM userInfo WHERE username = ?", req.params.username, (err, results) =>{
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกข้อมูลผู้ใช้นี้ได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
         res.json(results)
     })
 });
 
-// สมัครบัญชี
-// ส่งข้อมูลด้วย .JSON !!!
+// ลงทะเบียนผู้ใช้งานใหม่
 router.post('/register', (req, res) =>{
     const newUser = {
         username: req.body.username, // ชื่อผู้ใช้
         password: req.body.password, // รหัสผ่าน
-        verifyPassword: req.body.verifyPassword, // ยืนยันรหัสผ่าน
         email: req.body.email, // อีเมล
-        verifyInfo: req.body.verifyInfo // ยืนยันข้อมูล
     };
     db.query("INSERT INTO userInfo(username, password, email) VALUE (?, ?, ?)", [newUser.username, newUser.password, newUser.email], (err, results) =>{
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถลงทะเบียนได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
+})
+// ลืมรหัสผ่าน
+router.get('/forgetpassword', (req, res) =>{
+    const userPass = {
+        username: req.body.username
+    }
+    db.query("SELECT password FROM userInfo WHERE username = ?", userPass.username, (err, results) =>{
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถร้องขอรหัสผ่านได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
         res.json(results);
     })
 })
 
 // อัพเดท, แก้ไขข้อมูลผู้ใช้
-// ทำอันนี้ต่อตอนกลางวัน
-router.put('/userList/:userID/updateProfile', (req, res) => {
+router.put('/userList/:username/updateProfile', (req, res) => {
     const updateProfile = {
         username: req.body.username,
         email: req.body.email,
@@ -64,10 +92,45 @@ router.put('/userList/:userID/updateProfile', (req, res) => {
         height: req.body.height,
         birthdate: req.body.birthdate
     }
-    db.query("UPDATE userInfo SET username = ?, email = ?, gender = ?, bloodtype = ?, weight = ?, height = ?, birthdate = ? WHERE userID = ?", 
-        [updateProfile.username, updateProfile.email, updateProfile.gender, updateProfile.bloodtype, updateProfile.weight,
-            updateProfile.height, updateProfile.birthdate, req.params.userID], (err, results) => {
-                res.json(results);
-            })
+    const columnsUpdate = []; // คอลัมน์ที่จะมีการอัพเดท
+    const valuesUpdate = []; // ค่าในการอัพเดท
+
+    // อัพเดท username
+    if(updateProfile.username){
+        columnsUpdate.push("username = ?");
+        valuesUpdate.push(updateProfile.username);
+    }
+    // อัพเดท email
+    if(updateProfile.email){
+        columnsUpdate.push("email = ?");
+        valuesUpdate.push(updateProfile.email);
+    }
+    // อัพเดท gender
+    if(updateProfile.gender){
+        columnsUpdate.push("gender = ?");
+        valuesUpdate.push(updateProfile.gender);
+    }
+    // อัพเดท bloodtype
+    if(updateProfile.bloodtype){
+        columnsUpdate.push("bloodtype = ?");
+        valuesUpdate.push(updateProfile.bloodtype);
+    }
+    // อัพเดท weight
+    if(updateProfile.weight){
+        columnsUpdate.push("weight = ?");
+        valuesUpdate.push(updateProfile.weight);
+    }
+    // อัพเดท height
+    if(updateProfile.height){
+        columnsUpdate.push("height = ?");
+        valuesUpdate.push(updateProfile.height);
+    }
+    // อัพเดท birthdate
+    if(updateProfile.birthdate){
+        columnsUpdate.push("birthdate = ?");
+        valuesUpdate.push(updateProfile.birthdate);
+    }
+
+
 })
 module.exports = router;
