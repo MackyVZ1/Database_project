@@ -194,13 +194,24 @@ router.get('/:covidInfo/:year/:weeknum', (req, res) => {
         res.json(results);
     })
 })
+// เรียกดูข้อมูลโควิด; ระบุระลอกและปีและอาทิตย์และจังหวัด
+router.get('/:covidInfo/:year/:weeknum/:province', (req, res) => {
+    db.query(`SELECT * FROM ${req.params.covidProvince}`, (err, results) => {
+    // ถ้าเกิด error ขึ้น
+    if(err){
+        res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดดังกล่าวได้"});
+    }
+    // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+    res.json(results);
+})
+})
 
 // เรียกดูข้อมูลโควิดตามพื้นที่
-router.get('/:covidProvince', (req, res) => {
+router.get('/:covidInfo/:province', (req, res) => {
         db.query(`SELECT * FROM ${req.params.covidProvince}`, (err, results) => {
         // ถ้าเกิด error ขึ้น
         if(err){
-            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอกดังกล่าวได้"});
+            res.status(400).json({msg: `ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดบริเวณพื้นที่ ${req.params.province} ได้`});
         }
         // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
         res.json(results);
