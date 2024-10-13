@@ -47,6 +47,25 @@ router.get('/userList/:username', (req, res) =>{
     })
 });
 
+// Example of a login endpoint in your backend
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    db.query('SELECT * FROM userInfo WHERE username = ? AND password = ?', [username, password], (err, results) => {
+        if (err) {
+            return res.status(500).json({ msg: 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ' });
+        }
+        
+        if (results.length > 0) {
+            // Login successful
+            return res.status(200).json({ msg: 'เข้าสู่ระบบสำเร็จ' });
+        } else {
+            // Login failed
+            return res.status(401).json({ msg: 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง' });
+        }
+    });
+});
+
 // ลงทะเบียนผู้ใช้งานใหม่
 router.post('/register', (req, res) =>{
     const newUser = {

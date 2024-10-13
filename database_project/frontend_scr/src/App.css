@@ -1,0 +1,708 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* MainPage CSS */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header {
+  width: 300%;
+  text-align: center;
+  background-color: #ff6b6b;
+  padding: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chart-section {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 20px;
+}
+
+.chart-image {
+  width: 600px;
+  height: auto;
+  border: 2px solid #000;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  width: 100%;
+  text-align: right;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.info-section p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.additional-info {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Dropdown Profile */
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.profile-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.profile-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.profile-dropdown:hover .profile-dropdown-content {
+  display: block;
+}
+
+.profile-dropdown:hover .profile-dropbtn {
+  background-color: #3e8e41;
+}
+
+.profile-dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style สำหรับ ProfilePage */
+.profile-container {
+  padding: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-info {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-info h2 {
+  margin-bottom: 10px;
+}
+
+.profile-info p {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-button {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style สำหรับ RegisterPage */
+.register-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.register-container h1 {
+  text-align: center;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.register-container label {
+  margin-bottom: 15px;
+}
+
+.register-container button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+.register-container p {
+  text-align: center;
+}
+
+/* Style สำหรับ LoginPage */
+.login-container {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-container h1 {
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.login-container p {
+  text-align: center;
+}
+
+.error-message {
+  color: red; /* สีของข้อความผิดพลาด */
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* การจัดการหน้า Profile */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  background-color: #f28b82;
+  color: black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header h1 {
+  margin: 0;
+}
+
+.profile-header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.profile-header nav ul li {
+  margin-left: 20px;
+}
+
+.profile-header nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.profile-content {
+  display: flex;
+  height: calc(100vh - 50px); /* ลดพื้นที่จาก header */
+}
+
+.profile-sidebar {
+  background-color: #f9f9f9;
+  width: 200px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-icon img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-sidebar-menu p {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.profile-sidebar-menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.profile-sidebar-menu a:hover {
+  color: #646cff;
+}
+
+.profile-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.profile-main h2 {
+  margin-top: 0;
+}
+
+/* PersonalPage */
+.personal-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff; /* พื้นหลังสีขาว */
+}
+
+.personal-page .header {
+  background-color: #f28b82;
+  padding: 10px;
+  text-align: left;
+  font-size: 24px;
+  color: white;
+}
+
+.personal-page .header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* การจัดการ layout ของเนื้อหาภายใน */
+.personal-page .content {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Sidebar */
+.personal-page .sidebar {
+  width: 220px; /* ปรับขนาด sidebar */
+  background-color: #f1f1f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #ccc; /* ขอบแบ่งด้านขวา */
+}
+
+.personal-page .profile-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.personal-page .profile-icon img {
+  width: 120px; /* ปรับขนาดภาพโปรไฟล์ */
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #646cff; /* เพิ่มขอบให้ภาพ */
+  margin-bottom: 10px;
+}
+
+.personal-page .profile-icon input[type="file"] {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.personal-page .menu {
+  text-align: left;
+  width: 100%;
+}
+
+.personal-page .menu p {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.personal-page .menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.personal-page .menu li {
+  margin-bottom: 15px;
+}
+
+.personal-page .menu a {
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.personal-page .menu a:hover {
+  background-color: #e9e9e9;
+}
+
+/* Main content */
+.personal-page .main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+  border-radius: 10px;
+}
+
+/* Form styling */
+.personal-page .form {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 15px;
+  align-items: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+.personal-page .form-group {
+  display: contents;
+}
+
+.personal-page input[type="text"], 
+.personal-page input[type="number"], 
+.personal-page select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.personal-page input[type="number"] {
+  max-width: 100px;
+}
+
+.personal-page label {
+  text-align: right;
+  padding-right: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.personal-page .form-group {
+  margin-bottom: 15px;
+}
+
+.personal-page button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.personal-page button:hover {
+  background-color: #0056b3;
+}
+
+/* เพิ่มเติม */
+.personal-page .additional-info {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+  color: #666;
+}
+
+/* AccountPage CSS */
+.account-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.account-page .header {
+  background-color: #f28b82;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer; /* ให้สามารถคลิกได้ */
+}
+
+.account-page .header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.account-page .content {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* Sidebar */
+.account-page .sidebar {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.account-page .profile-icon {
+  text-align: center;
+}
+
+.account-page .profile-icon img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.account-page .menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-page .menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.account-page .menu a:hover {
+  color: #646cff;
+}
+
+.account-page .main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.account-page .account-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-page .form-group {
+  margin-bottom: 15px;
+}
+
+.account-page label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.account-page input[type="email"],
+.account-page input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* LogoutPage Style */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* พื้นหลังโปร่งใส */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* ทำให้ popup อยู่เหนือองค์ประกอบอื่น */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.popup-actions {
+  margin-top: 10px;
+}
+
+.popup-actions button {
+  margin: 0 10px;
+  padding: 10px 20px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.popup p {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.popup, .logout-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.logout-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

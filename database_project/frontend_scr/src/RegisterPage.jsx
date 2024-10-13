@@ -1,0 +1,117 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios'; // นำเข้า axios สำหรับทำ HTTP requests
+import './App.css'; 
+
+function RegisterPage() {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // สำหรับเก็บข้อความข้อผิดพลาด
+  const [successMessage, setSuccessMessage] = useState(''); // สำหรับเก็บข้อความสำเร็จ
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (password !== confirmPassword) {
+      setErrorMessage('รหัสผ่านไม่ตรงกัน');
+      setSuccessMessage('');
+      return;
+    }
+
+    if (!isChecked) {
+      setErrorMessage('กรุณายืนยันข้อมูลของคุณเป็นความจริง');
+      setSuccessMessage('');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/register', { // ส่งข้อมูลไปยัง backend
+        email,
+        username,
+        password,
+      });
+
+      if (response.status === 201) {
+        // ลงทะเบียนสำเร็จ
+        setSuccessMessage('ลงทะเบียนสำเร็จ!'); // แสดงข้อความสำเร็จ
+        setErrorMessage(''); // ล้างข้อความข้อผิดพลาด (ถ้ามี)
+        // คุณอาจต้องการล้างฟิลด์หลังจากลงทะเบียน
+        setEmail('');
+        setUsername('');
+        setPassword('');
+        setConfirmPassword('');
+        setIsChecked(false);
+      } else {
+        // เกิดข้อผิดพลาดที่ backend
+        setErrorMessage('เกิดข้อผิดพลาดในการลงทะเบียน');
+        setSuccessMessage('');
+      }
+    } catch (error) {
+      // จัดการข้อผิดพลาดจาก backend
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.msg || 'เกิดข้อผิดพลาดในการลงทะเบียน');
+        setSuccessMessage('');
+      } else {
+        setErrorMessage('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์');
+        setSuccessMessage('');
+      }
+    }
+  };
+
+  return (
+    <div className="register-container">
+      <h1>สมัครบัญชีผู้ใช้ใหม่</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="อีเมล"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="ชื่อผู้ใช้"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="รหัสผ่าน"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="ยืนยันรหัสผ่าน"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          /> ข้อมูลของข้าพเจ้าเป็นความจริง
+        </label>
+        <button type="submit">สมัคร</button>
+      </form>
+
+      {/* แสดงข้อความข้อผิดพลาด */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      
+      {/* แสดงข้อความสำเร็จ */}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+
+      <p>มีบัญชีผู้ใช้แล้ว? <Link to="/login">เข้าสู่ระบบ</Link></p>
+    </div>
+  );
+}
+
+export default RegisterPage;
