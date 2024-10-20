@@ -55,6 +55,26 @@ function MainPage() {
     fetchCovidData(); // เรียกใช้งานฟังก์ชัน fetchCovidData เมื่อ component ถูก mount
   }, []); // Empty dependency array หมายความว่า useEffect นี้จะทำงานครั้งเดียวตอน mount
 
+//   // ดึงข้อมูลจากฐานข้อมูล
+//   useEffect(() =>{
+//     const showUser = async() =>{
+//         try{
+//             // ยิง API GET method
+//             const response = await axios.get("http://localhost:5000/api/report_round1to2")
+//             if(response.status === 200){
+//                 console.log(response.data)
+//                 // นำ json มาเก็บใน data
+//                 setData(response.data)
+//             }
+//         }catch(error){
+//             console.log("Error: ", error)
+//         }finally{
+//             setLoading(false)
+//         }
+//     }
+//     showUser()
+// },[]) // [] สำหรับเรนเดอร์ข้อมูลครั้งเดียว ป้องกันการลูป
+
   return (
     <div className="main-container">
       {/* ส่วนของ Header */}

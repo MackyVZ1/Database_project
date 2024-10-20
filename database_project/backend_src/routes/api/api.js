@@ -240,7 +240,7 @@ router.get('/report_round1to2_by_province', (req, res) => {
 
 // เรียกดูข้อมูลโควิดระลอก 3
 router.get('/report_round3', (req, res) => {
-        db.query("SELECT * FROM report_round3", (err, results) => {
+    db.query("SELECT * FROM report_round3", (err, results) => {
         // ถ้าเกิด error ขึ้น
         if(err){
             res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 3 ได้"});
@@ -252,18 +252,18 @@ router.get('/report_round3', (req, res) => {
 // เรียกดูข้อมูลโควิดระลอก 3 ตามจังหวัด
 router.get('/report_round3_by_province', (req, res) => {
     db.query("SELECT * FROM report_round3_by_province", (err, results) => {
-    // ถ้าเกิด error ขึ้น
-    if(err){
-        res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 3 ตามจังหวัดได้"});
-    }
-    // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
-    res.json(results);
-})
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 3 ตามจังหวัดได้"});
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
 })
 
 // เรียกดูข้อมูลโควิดระลอก 4
 router.get('/report_round4', (req, res) => {
-        db.query("SELECT * FROM report_round4", (err, results) => {
+    db.query("SELECT * FROM report_round4", (err, results) => {
         // ถ้าเกิด error ขึ้น
         if(err){
             res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 4 ได้"});;
@@ -276,13 +276,13 @@ router.get('/report_round4', (req, res) => {
 // เรียกดูข้อมูลโควิดระลอก 4 ตามจังหวัด
 router.get('/report_round4_by_province', (req, res) => {
     db.query("SELECT * FROM report_round4_by_province", (err, results) => {
-    // ถ้าเกิด error ขึ้น
-    if(err){
-        res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 4 ตามจังหวัดได้"});;
-    }
-    // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
-    res.json(results);
-})
+        // ถ้าเกิด error ขึ้น
+        if(err){
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกดูข้อมูลโควิดระลอก 4 ตามจังหวัดได้"});;
+        }
+        // ส่งข้อมูลกลับเป็น .json ; เอา results ไปใช้ต่อเลย
+        res.json(results);
+    })
 })
 
 module.exports = router;
