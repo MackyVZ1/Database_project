@@ -1,0 +1,45 @@
+/* profile.css */
+.profile-container {
+    padding: 10px;
+  }
+  
+  .profile-header {
+    text-align: center;
+  }
+  
+  .profile-info {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info h2 {
+    margin-bottom: 10px;
+  }
+  
+  .profile-info p {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  
+  .profile-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .action-button {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional profile-specific styles can go here */
+  

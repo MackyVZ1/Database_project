@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // นำเข้า axios
 import './App.css'; // นำเข้า CSS ที่คุณรวมไว้
+import './login.css';
+
+const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -8,6 +12,7 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,27 +24,24 @@ function LoginPage() {
 
     try {
       // ทำการเรียก API เพื่อลงชื่อเข้าใช้
-      const response = await fetch('http://your-backend-url/login', { // เปลี่ยนให้เป็น URL ของ backend ของคุณ
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }), // ส่งข้อมูลเป็น JSON
+      const response = await axios.post(`${apiUrl}/login`, { // ใช้ environment variable
+        username,
+        password, // ส่งข้อมูลเป็น JSON
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // การเข้าสู่ระบบสำเร็จ
-        alert("เข้าสู่ระบบสำเร็จ!");
-        navigate('/main'); // เปลี่ยนไปที่หน้า Main เมื่อเข้าสู่ระบบสำเร็จ
-      } else {
-        // แสดงข้อความผิดพลาด
-        setErrorMessage(data.msg || 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'); // ใช้ข้อความที่ได้รับจาก backend
-      }
+      // การเข้าสู่ระบบสำเร็จ
+      alert("เข้าสู่ระบบสำเร็จ!");
+      navigate('/main'); // เปลี่ยนไปที่หน้า Main เมื่อเข้าสู่ระบบสำเร็จ
     } catch (error) {
-      console.error('Error:', error);
-      setErrorMessage('เกิดข้อผิดพลาดในการเข้าสู่ระบบ'); // ข้อความผิดพลาดสำหรับกรณีที่เกิดข้อผิดพลาดในการเรียก API
+      // แสดงข้อความผิดพลาด
+      if (error.response) {
+        // เมื่อได้รับการตอบกลับจาก server
+        setErrorMessage(error.response.data.msg || 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'); // ใช้ข้อความที่ได้รับจาก backend
+      } else {
+        // ข้อความผิดพลาดสำหรับกรณีที่ไม่สามารถเชื่อมต่อกับ server
+        console.error('Error:', error);
+        setErrorMessage('เกิดข้อผิดพลาดในการเข้าสู่ระบบ'); // ข้อความผิดพลาดสำหรับกรณีที่เกิดข้อผิดพลาดในการเรียก API
+      }
     }
   };
 

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YiPPY</title>
+    <link rel="stylesheet" href="App.css" /> <!-- เชื่อมโยงกับไฟล์ CSS -->
+  </head>
+  <body>
+    <div id="root">
+      <!-- Login Page -->
+      <div id="loginPage" class="page">
+        <header>
+          <h1>เข้าสู่ระบบ</h1>
+        </header>
+        <main>
+          <form>
+            <label for="username">ชื่อผู้ใช้:</label>
+            <input type="text" id="username" name="username" required />
+            <label for="password">รหัสผ่าน:</label>
+            <input type="password" id="password" name="password" required />
+            <button type="submit">เข้าสู่ระบบ</button>
+          </form>
+          <p>ไม่มีบัญชีผู้ใช้? <a href="#registerPage">สมัครที่นี่</a></p>
+        </main>
+      </div>
+
+      <!-- Register Page -->
+      <div id="registerPage" class="page">
+        <header>
+          <h1>สมัครสมาชิก</h1>
+        </header>
+        <main>
+          <form>
+            <label for="fullname">ชื่อ-นามสกุล:</label>
+            <input type="text" id="fullname" name="fullname" required />
+            <label for="username">ชื่อผู้ใช้:</label>
+            <input type="text" id="usernameReg" name="username" required />
+            <label for="password">รหัสผ่าน:</label>
+            <input type="password" id="passwordReg" name="password" required />
+            <label for="confirmPassword">ยืนยันรหัสผ่าน:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required />
+            <button type="submit">สมัครสมาชิก</button>
+          </form>
+        </main>
+      </div>
+
+      <!-- Main Page -->
+      <div id="mainPage" class="page">
+        <header>
+          <h1>หน้าหลัก</h1>
+        </header>
+        <main>
+          <h2>ข้อมูลเว็บ</h2>
+          <p>แสดงข้อมูลต่าง ๆ ที่เกี่ยวกับเว็บไซต์</p>
+          <img src="path/to/your/chart.png" alt="กราฟ" />
+        </main>
+      </div>
+
+      <!-- Profile Page -->
+      <div id="profilePage" class="page">
+        <header>
+          <h1>โปรไฟล์</h1>
+        </header>
+        <main>
+          <h2>ข้อมูลผู้ใช้</h2>
+          <p>แสดงข้อมูลโปรไฟล์ของผู้ใช้</p>
+          <form>
+            <label for="email">อีเมล:</label>
+            <input type="email" id="email" name="email" required />
+            <label for="phone">เบอร์โทร:</label>
+            <input type="text" id="phone" name="phone" required />
+            <button type="submit">บันทึกข้อมูล</button>
+          </form>
+        </main>
+      </div>
+
+      <!-- Details Page -->
+      <div id="detailsPage" class="page">
+        <header>
+          <h1>รายละเอียด</h1>
+        </header>
+        <main>
+          <h2>ข้อมูลเพิ่มเติม</h2>
+          <p>แสดงข้อมูลเพิ่มเติมเกี่ยวกับบริการ</p>
+        </main>
+      </div>
+
+      <!-- Note Page -->
+      <div id="notePage" class="page">
+        <header>
+          <h1>บันทึก</h1>
+        </header>
+        <main>
+          <h2>เพิ่มบันทึกใหม่</h2>
+          <form>
+            <label for="noteTitle">ชื่อบันทึก:</label>
+            <input type="text" id="noteTitle" name="noteTitle" required />
+            <label for="noteContent">เนื้อหาบันทึก:</label>
+            <textarea id="noteContent" name="noteContent" required></textarea>
+            <button type="submit">บันทึก</button>
+          </form>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

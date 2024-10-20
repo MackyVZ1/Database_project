@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import LogoutPopup from './LogoutPopup'; // Import the LogoutPopup component
 import './App.css';
+import './account.css';
 
 function AccountPage() {
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
     const [userData, setUserData] = useState({ email: '', password: '' });
-    const [showSavePopup, setShowSavePopup] = useState(false); // state for the save popup
-    const [popupMessage, setPopupMessage] = useState(''); // message in the popup
+    const [showSavePopup, setShowSavePopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Function to open logout popup
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+    useEffect(() => {
+        if (!apiUrl) {
+            setError('API URL is not defined');
+        }
+    }, [apiUrl]);
+
+    // Function to open logout confirmation popup
     const handleLogoutClick = () => {
         setShowLogoutPopup(true);
     };
@@ -17,43 +29,38 @@ function AccountPage() {
     // Function to confirm logout
     const handleConfirmLogout = () => {
         setShowLogoutPopup(false);
-        navigate('/main'); // Navigate to main page
+        navigate('/main'); // Redirect to main page after logout
     };
 
     // Function to update user profile
     const handleUpdateProfile = async (event) => {
         event.preventDefault();
-        
+
         const { email, password } = userData;
 
         try {
-            const response = await fetch('https://your-backend-url/userList/your-username/updateProfile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            const response = await axios.put(`${apiUrl}/userList/your-username/updateProfile`, {
+                email,
+                password,
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (response.status === 200) {
                 setPopupMessage('ข้อมูลได้ถูกบันทึกเรียบร้อยแล้ว');
             } else {
-                setPopupMessage(data.msg || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                setPopupMessage(response.data.msg || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
             }
         } catch (error) {
             console.error('Error updating profile:', error);
             setPopupMessage('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
         } finally {
-            setShowSavePopup(true); // Show the popup after trying to save
+            setShowSavePopup(true);
             setTimeout(() => {
-                setShowSavePopup(false); // Hide the popup after 3 seconds
+                setShowSavePopup(false);
             }, 3000);
         }
     };
 
-    // Function to handle changes in form inputs
+    // Function to handle changes in form input
     const handleChange = (event) => {
         const { name, value } = event.target;
         setUserData({ ...userData, [name]: value });
@@ -84,48 +91,49 @@ function AccountPage() {
                     <form className="account-form" onSubmit={handleUpdateProfile}>
                         <div className="form-group">
                             <label>e-mail:</label>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                value={userData.email} 
-                                onChange={handleChange} 
-                                placeholder="กรอก e-mail" 
-                                required 
+                            <input
+                                type="email"
+                                name="email"
+                                value={userData.email}
+                                onChange={handleChange}
+                                placeholder="กรอก e-mail"
+                                required
                             />
                         </div>
                         <div className="form-group">
                             <label>Password:</label>
-                            <input 
-                                type="password" 
-                                name="password" 
-                                value={userData.password} 
-                                onChange={handleChange} 
-                                placeholder="กรอก Password" 
-                                required 
+                            <input
+                                type="password"
+                                name="password"
+                                value={userData.password}
+                                onChange={handleChange}
+                                placeholder="กรอก Password"
+                                required
                             />
                         </div>
                         <button type="submit">บันทึกข้อมูล</button>
                     </form>
 
-                    {/* Show Popup for Save Status */}
+                    {/* Popup แสดงผลลัพธ์การบันทึกข้อมูล */}
                     {showSavePopup && (
                         <div className="popup">
                             <p>{popupMessage}</p>
                         </div>
                     )}
-
-                    {/* Show Popup for Logout Confirmation */}
+                    {/* Popup ยืนยันการ logout */}
                     {showLogoutPopup && (
-                        <div className="logout-popup">
-                            <p>คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?</p>
-                            <button onClick={handleConfirmLogout}>ยืนยัน</button>
-                            <button onClick={() => setShowLogoutPopup(false)}>ยกเลิก</button>
-                        </div>
+                        <LogoutPopup
+                            onClose={() => setShowLogoutPopup(false)}
+                            onConfirm={handleConfirmLogout}
+                        />
                     )}
+
+                    {/* Show error if any */}
+                    {error && <p className="error-message">{error}</p>}
                 </main>
             </div>
         </div>
     );
 }
 
-export default AccountPage;
+export default AccountPage; // Export AccountPage

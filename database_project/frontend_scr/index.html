@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YiPPY</title>
-    <link rel="stylesheet" href="styles.css" /> <!-- เชื่อมโยงกับไฟล์ CSS -->
+    <link rel="stylesheet" href="App.css" /> <!-- เชื่อมโยงกับไฟล์ CSS -->
   </head>
   <body>
     <div id="root">
@@ -52,9 +52,8 @@
           <h1>หน้าหลัก</h1>
         </header>
         <main>
-          <h2>ข้อมูลเว็บ</h2>
-          <p>แสดงข้อมูลต่าง ๆ ที่เกี่ยวกับเว็บไซต์</p>
-          <img src="path/to/your/chart.png" alt="กราฟ" />
+          <div id="data-container"></div>
+          <api src="api.js"></api>
         </main>
       </div>
 

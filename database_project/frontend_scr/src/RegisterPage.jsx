@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // นำเข้า axios สำหรับทำ HTTP requests
 import './App.css'; 
+import './register.css';
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -12,15 +13,21 @@ function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState(''); // สำหรับเก็บข้อความข้อผิดพลาด
   const [successMessage, setSuccessMessage] = useState(''); // สำหรับเก็บข้อความสำเร็จ
 
+  // URL API ที่จะใช้ส่งข้อมูล
+  const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable เช่นเดียวกับหน้า PersonalPage
+
+  // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // ตรวจสอบว่ารหัสผ่านตรงกันหรือไม่
     if (password !== confirmPassword) {
       setErrorMessage('รหัสผ่านไม่ตรงกัน');
       setSuccessMessage('');
       return;
     }
 
+    // ตรวจสอบว่าผู้ใช้ยืนยันข้อมูลหรือยัง
     if (!isChecked) {
       setErrorMessage('กรุณายืนยันข้อมูลของคุณเป็นความจริง');
       setSuccessMessage('');
@@ -28,24 +35,27 @@ function RegisterPage() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/register', { // ส่งข้อมูลไปยัง backend
+      // ส่งคำขอลงทะเบียนไปยัง backend ด้วย axios
+      const response = await axios.post(`${apiUrl}/api/register`, {
         email,
         username,
         password,
       });
 
+      // ตรวจสอบสถานะของคำขอ
       if (response.status === 201) {
-        // ลงทะเบียนสำเร็จ
+        // ถ้าลงทะเบียนสำเร็จ
         setSuccessMessage('ลงทะเบียนสำเร็จ!'); // แสดงข้อความสำเร็จ
         setErrorMessage(''); // ล้างข้อความข้อผิดพลาด (ถ้ามี)
-        // คุณอาจต้องการล้างฟิลด์หลังจากลงทะเบียน
+        
+        // ล้างฟิลด์ข้อมูลหลังจากลงทะเบียน
         setEmail('');
         setUsername('');
         setPassword('');
         setConfirmPassword('');
         setIsChecked(false);
       } else {
-        // เกิดข้อผิดพลาดที่ backend
+        // ถ้าเกิดข้อผิดพลาดจาก backend
         setErrorMessage('เกิดข้อผิดพลาดในการลงทะเบียน');
         setSuccessMessage('');
       }

@@ -1,36 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './App.css'; // Import your CSS
+import React, { useEffect, useState } from 'react'; // นำเข้า React, useEffect, และ useState
+import { Link } from 'react-router-dom'; // นำเข้า Link สำหรับการนำทาง
+import axios from 'axios'; // นำเข้า axios สำหรับการทำ HTTP requests
+import './App.css'; // นำเข้า CSS
+import './main.css';
 
 function MainPage() {
-  const [covidData, setCovidData] = useState([]); // State for storing COVID data
-  const [error, setError] = useState(null); // State for error handling
-  const [loading, setLoading] = useState(true); // State for loading indication
+  // สร้าง state สำหรับเก็บข้อมูล COVID, ข้อความข้อผิดพลาด, และสถานะกำลังโหลด
+  const [covidData, setCovidData] = useState([]); // เก็บข้อมูล COVID
+  const [error, setError] = useState(null); // เก็บข้อความข้อผิดพลาด
+  const [loading, setLoading] = useState(true); // สถานะกำลังโหลดข้อมูล
 
-  useEffect(() => {
-    // Fetch COVID data from the backend
-    const fetchCovidData = async () => {
-      setLoading(true); // Set loading to true before fetching
-      try {
-        // Replace with your actual endpoint
-        const response = await fetch('http://your-backend-url/api/covidInfo'); 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setCovidData(data); // Store fetched data in state
-      } catch (error) {
-        setError(error.message); // Handle error
-      } finally {
-        setLoading(false); // Set loading to false after fetching
+  // ฟังก์ชันสำหรับ fetch ข้อมูล COVID จาก API ทีละ endpoint
+  const fetchCovidData = async () => {
+    setLoading(true); // ตั้งค่า loading เป็น true ขณะดึงข้อมูล
+
+    const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable สำหรับ API URL
+    if (!apiUrl) {
+      setError('API URL is not defined'); // หากไม่มี API URL จะแสดงข้อผิดพลาด
+      setLoading(false); // ตั้งค่า loading เป็น false ถ้าไม่มี API URL
+      return;
+    }
+
+    // รายชื่อ endpoint ที่จะดึงข้อมูล
+    const endpoints = [
+      `${apiUrl}/report_round1to2`,
+      `${apiUrl}/report_round1to2_province`, 
+      `${apiUrl}/report_round3`,
+      `${apiUrl}/report_round3_province`,
+      `${apiUrl}/report_round4`,
+      `${apiUrl}/report_round4_province`,
+    ];
+
+    try {
+      for (const endpoint of endpoints) {
+        const response = await axios.get(endpoint, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        // บันทึกข้อมูล COVID ที่ได้ใน state
+        setCovidData(prevData => [...prevData, ...response.data]); // รวมข้อมูลใหม่เข้ากับข้อมูลที่มีอยู่
       }
-    };
+    } catch (error) {
+      console.error('Error fetching COVID data:', error); // แสดงข้อผิดพลาดใน console
+      setError('ไม่สามารถดึงข้อมูล COVID ได้'); // ตั้งค่าข้อความข้อผิดพลาด
+    } finally {
+      setLoading(false); // ตั้งค่า loading เป็น false หลังจาก fetch ข้อมูลเสร็จ
+    }
+  };
 
-    fetchCovidData(); // Call the function to fetch data
-  }, []); // Empty dependency array means this runs once on component mount
+  // ใช้ useEffect เพื่อดึงข้อมูล COVID เมื่อ component โหลดขึ้นครั้งแรก
+  useEffect(() => {
+    fetchCovidData(); // เรียกใช้งานฟังก์ชัน fetchCovidData เมื่อ component ถูก mount
+  }, []); // Empty dependency array หมายความว่า useEffect นี้จะทำงานครั้งเดียวตอน mount
 
   return (
     <div className="main-container">
+      {/* ส่วนของ Header */}
       <header className="header">
         <h1 className="logo">YiPPY</h1>
         <div className="profile-dropdown">
@@ -42,42 +69,38 @@ function MainPage() {
           </div>
         </div>
       </header>
-      <div className="chart-section">
-        <img
-          src="path/to/your/chart-image.png" // Add your chart image path here
-          alt="Chart"
-          className="chart-image"
-        />
-      </div>
-      <div className="info-section">
-        <p>ข้อมูลเพิ่มเติมเกี่ยวกับเว็บนี้</p>
-        <p>รายละเอียดเกี่ยวกับฟีเจอร์ที่น่าสนใจ</p>
-      </div>
-      <div className="additional-info">
-        <p>ข้อมูลเพิ่มเติมที่นี่</p>
-      </div>
+
+      {/* ส่วนของข้อมูล COVID */}
       <div className="covid-data-section">
-        {loading && <p>Loading data...</p>} {/* Show loading message */}
-        {error && <p className="error">{error}</p>} {/* Display error if any */}
-        <h2>COVID Data</h2>
+        {loading && <p>กำลังโหลดข้อมูล...</p>} {/* แสดงข้อความเมื่อข้อมูลกำลังถูกโหลด */}
+        {error && <p className="error">{error}</p>} {/* แสดงข้อความข้อผิดพลาดหากมี */}
+
+        <h2>ข้อมูล COVID</h2>
+
+        {/* แสดงข้อมูล COVID ที่ถูก fetch มา */}
         {covidData.length > 0 ? (
           <ul>
             {covidData.map((data, index) => (
               <li key={index}>
-                {/* Display relevant data properties */}
-                <p>Year: {data.year}</p>
-                <p>Week: {data.weeknum}</p>
-                <p>Province: {data.province}</p>
-                {/* Add more fields as needed */}
+                <p>ปี: {data.year}</p> {/* แสดงปี */}
+                <p>อาทิตย์: {data.weeknum}</p> {/* แสดงอาทิตย์ */}
+                <p>จังหวัด: {data.province}</p> {/* แสดงจังหวัด */}
+                {data.image && (
+                  <img
+                    src={data.image}
+                    alt={`ข้อมูล COVID สำหรับ ${data.province}`}
+                    className="covid-image"
+                  />
+                )}
               </li>
             ))}
           </ul>
         ) : (
-          !loading && <p>No data available.</p> // Message when no data is available
+          !loading && <p>ไม่มีข้อมูลที่พร้อมใช้งาน</p> // แสดงข้อความหากไม่มีข้อมูลและข้อมูลไม่กำลังโหลด
         )}
       </div>
     </div>
   );
 }
 
-export default MainPage;
+export default MainPage; // ส่งออก component MainPage

@@ -1,0 +1,43 @@
+/* accountPage.css */
+
+.account-page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .account-page h2 {
+    color: #ff6b6b;
+    margin-bottom: 20px;
+  }
+  
+  .account-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .account-form label {
+    font-weight: bold;
+  }
+  
+  .account-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .account-form button {
+    padding: 10px;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .account-form button:hover {
+    background-color: #535bf2;
+  }
+  
