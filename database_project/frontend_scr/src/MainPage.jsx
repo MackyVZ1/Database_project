@@ -14,7 +14,9 @@ function MainPage() {
   const fetchCovidData = async () => {
     setLoading(true); // ตั้งค่า loading เป็น true ขณะดึงข้อมูล
   
-    const apiUrl = "http://localhost:5000/api"; // ใช้ environment variable สำหรับ API URL
+    // กำหนด API URL หลัก
+    //const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable สำหรับ API URL
+    const apiUrl = "http://localhost:5000/api"
     if (!apiUrl) {
       setError('API URL is not defined'); // หากไม่มี API URL จะแสดงข้อผิดพลาด
       setLoading(false); // ตั้งค่า loading เป็น false ถ้าไม่มี API URL
