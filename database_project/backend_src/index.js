@@ -1,6 +1,6 @@
 // import extension
 const express = require('express'); // ExpressJS
-const logger = require('./logger.js')
+const cors = require('cors')
 
 
 // Variable Declaration
@@ -8,6 +8,10 @@ const port = process.env.port || 5000; // เช็คว่าถ้าหา p
 
 // Init express
 const app = express();
+
+app.use(cors({
+    orgin:'*'
+}))
 
 // กำหนด middleware ,รับข้อมูลแบบ JSON; Body parse
 app.use(express.json());

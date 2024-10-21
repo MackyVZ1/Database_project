@@ -25,6 +25,7 @@ function MainPage() {
 
   // ฟังก์ชันสำหรับ fetch ข้อมูลทีละ request
   const fetchCovidData = async () => {
+  HEAD
     setLoading(true); 
     const apiUrl = 'http://localhost:5000/api'; 
 
@@ -32,8 +33,7 @@ function MainPage() {
     const fetchRound1to2 = async () => {
       const response = await axios.get(`${apiUrl}/report_round1to2`);
       return response.data;
-    }
-
+    };
     const fetchRound1to2Province = async () => {
       const response = await axios.get(`${apiUrl}/report_round1to2_province`);
       return response.data;
@@ -156,6 +156,26 @@ function MainPage() {
       }
     },
   };
+
+//   // ดึงข้อมูลจากฐานข้อมูล
+//   useEffect(() =>{
+//     const showUser = async() =>{
+//         try{
+//             // ยิง API GET method
+//             const response = await axios.get("http://localhost:5000/api/report_round1to2")
+//             if(response.status === 200){
+//                 console.log(response.data)
+//                 // นำ json มาเก็บใน data
+//                 setData(response.data)
+//             }
+//         }catch(error){
+//             console.log("Error: ", error)
+//         }finally{
+//             setLoading(false)
+//         }
+//     }
+//     showUser()
+// },[]) // [] สำหรับเรนเดอร์ข้อมูลครั้งเดียว ป้องกันการลูป
 
   return (
     <div className="main-container">
