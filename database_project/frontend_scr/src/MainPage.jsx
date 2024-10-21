@@ -1,67 +1,175 @@
-import React, { useEffect, useState } from 'react'; // นำเข้า React, useEffect, และ useState
-import { Link } from 'react-router-dom'; // นำเข้า Link สำหรับการนำทาง
-import axios from 'axios'; // นำเข้า axios สำหรับการทำ HTTP requests
-import './App.css'; // นำเข้า CSS
+import React, { useEffect, useState } from 'react'; 
+import { Link } from 'react-router-dom'; 
+import axios from 'axios'; 
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import './App.css'; 
 import './main.css';
 
+// Register chart.js modules
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 function MainPage() {
-  // สร้าง state สำหรับเก็บข้อมูล COVID, ข้อความข้อผิดพลาด, และสถานะกำลังโหลด
-  const [covidData, setCovidData] = useState([]); // เก็บข้อมูล COVID
-  const [error, setError] = useState(null); // เก็บข้อความข้อผิดพลาด
-  const [loading, setLoading] = useState(true); // สถานะกำลังโหลดข้อมูล
+  const [covidData, setCovidData] = useState({
+    round1to2: [],
+    round1to2Province: [],
+    round3: [],
+    round3Province: [],
+    round4: [],
+    round4Province: []
+  });
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(true); 
+  const [selectedData, setSelectedData] = useState(null); // เก็บข้อมูลที่กดจากกราฟ
+  const [profileImage, setProfileImage] = useState(null);
 
-  // ฟังก์ชันสำหรับ fetch ข้อมูล COVID จาก API ทีละ endpoint
+  // ฟังก์ชันสำหรับ fetch ข้อมูลทีละ request
   const fetchCovidData = async () => {
-    setLoading(true); // ตั้งค่า loading เป็น true ขณะดึงข้อมูล
+    setLoading(true); 
+    const apiUrl = 'http://localhost:5000/api'; 
 
-    const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable สำหรับ API URL
-    if (!apiUrl) {
-      setError('API URL is not defined'); // หากไม่มี API URL จะแสดงข้อผิดพลาด
-      setLoading(false); // ตั้งค่า loading เป็น false ถ้าไม่มี API URL
-      return;
+    // Fetch แยกแต่ละรอบ
+    const fetchRound1to2 = async () => {
+      const response = await axios.get(`${apiUrl}/report_round1to2`);
+      return response.data;
     }
 
-    // รายชื่อ endpoint ที่จะดึงข้อมูล
-    const endpoints = [
-      `${apiUrl}/report_round1to2`,
-      `${apiUrl}/report_round1to2_province`, 
-      `${apiUrl}/report_round3`,
-      `${apiUrl}/report_round3_province`,
-      `${apiUrl}/report_round4`,
-      `${apiUrl}/report_round4_province`,
-    ];
+    const fetchRound1to2Province = async () => {
+      const response = await axios.get(`${apiUrl}/report_round1to2_province`);
+      return response.data;
+    };
+
+    const fetchRound3 = async () => {
+      const response = await axios.get(`${apiUrl}/report_round3`);
+      return response.data;
+    };
+
+    const fetchRound3Province = async () => {
+      const response = await axios.get(`${apiUrl}/report_round3_province`);
+      return response.data;
+    };
+
+    const fetchRound4 = async () => {
+      const response = await axios.get(`${apiUrl}/report_round4`);
+      return response.data;
+    };
+
+    const fetchRound4Province = async () => {
+      const response = await axios.get(`${apiUrl}/report_round4_province`);
+      return response.data;
+    };
 
     try {
-      for (const endpoint of endpoints) {
-        const response = await axios.get(endpoint, {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
+      // ดึงข้อมูลทั้งหมด
+      const round1to2Data = await fetchRound1to2();
+      const round1to2ProvinceData = await fetchRound1to2Province();
+      const round3Data = await fetchRound3();
+      const round3ProvinceData = await fetchRound3Province();
+      const round4Data = await fetchRound4();
+      const round4ProvinceData = await fetchRound4Province();
 
-        // บันทึกข้อมูล COVID ที่ได้ใน state
-        setCovidData(prevData => [...prevData, ...response.data]); // รวมข้อมูลใหม่เข้ากับข้อมูลที่มีอยู่
-      }
+      setCovidData({
+        round1to2: round1to2Data,
+        round1to2Province: round1to2ProvinceData,
+        round3: round3Data,
+        round3Province: round3ProvinceData,
+        round4: round4Data,
+        round4Province: round4ProvinceData,
+      });
+      setError(null);
     } catch (error) {
-      console.error('Error fetching COVID data:', error); // แสดงข้อผิดพลาดใน console
-      setError('ไม่สามารถดึงข้อมูล COVID ได้'); // ตั้งค่าข้อความข้อผิดพลาด
+      console.error('Error fetching COVID data:', error);
+      setError('ไม่สามารถดึงข้อมูล COVID ได้');
     } finally {
-      setLoading(false); // ตั้งค่า loading เป็น false หลังจาก fetch ข้อมูลเสร็จ
+      setLoading(false);
     }
   };
 
-  // ใช้ useEffect เพื่อดึงข้อมูล COVID เมื่อ component โหลดขึ้นครั้งแรก
   useEffect(() => {
-    fetchCovidData(); // เรียกใช้งานฟังก์ชัน fetchCovidData เมื่อ component ถูก mount
-  }, []); // Empty dependency array หมายความว่า useEffect นี้จะทำงานครั้งเดียวตอน mount
+    fetchCovidData();
+  }, []);
+
+  useEffect(() => {
+    // ฟังก์ชันดึงข้อมูลรูปภาพโปรไฟล์จาก backend
+    const fetchProfileImage = async () => {
+      try {
+        // ดึงข้อมูลรูปภาพจาก backend โดยใช้ axios
+        const response = await axios.get(`${apiUrl}/user/profileImage`); // เรียก API ที่ดึงรูปโปรไฟล์
+        if (response.data.profileImage) {
+          setProfileImage(response.data.profileImage); // ใช้รูปจาก response ถ้ามี
+        } else {
+          const uploadedImage = localStorage.getItem('profileImage'); // fallback ไปที่ localStorage
+          setProfileImage(uploadedImage || null); // ใช้รูป local หรือ null ถ้าไม่มี
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+        const uploadedImage = localStorage.getItem('profileImage'); // fallback ไปที่ localStorage เมื่อเกิดข้อผิดพลาด
+        setProfileImage(uploadedImage || null); // ใช้รูป local หรือ null ถ้าไม่มี
+      }
+    };
+
+    fetchProfileImage(); // เรียกฟังก์ชันเมื่อคอมโพเนนต์โหลด
+  }, []);
+
+  // ฟังก์ชันเตรียมข้อมูลกราฟ
+  const prepareChartData = (roundData) => {
+    const weeks = roundData.map(data => `Week ${data.weeknum}`);
+    const newCases = roundData.map(data => data.new_cases);
+    const cumulativeCases = roundData.map(data => data.cumulative_cases);
+
+    return {
+      labels: weeks,
+      datasets: [
+        {
+          label: 'จำนวนผู้ป่วยรายใหม่',
+          data: newCases,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        },
+        {
+          label: 'จำนวนผู้ป่วยสะสม',
+          data: cumulativeCases,
+          borderColor: 'rgba(153, 102, 255, 1)',
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        },
+      ],
+    };
+  };
+
+  // กำหนด options ของกราฟ
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'ข้อมูลผู้ป่วย COVID-19 รายใหม่และสะสมในแต่ละสัปดาห์',
+      },
+    },
+    onClick: (event, elements) => {
+      if (elements.length > 0) {
+        const { index } = elements[0].element;
+        const dataPoint = covidData.round1to2[index]; // เปลี่ยนตรงนี้ตามข้อมูลที่ใช้
+        setSelectedData(dataPoint); // แสดงข้อมูลเชิงลึก
+      }
+    },
+  };
 
   return (
     <div className="main-container">
-      {/* ส่วนของ Header */}
       <header className="header">
         <h1 className="logo">YiPPY</h1>
         <div className="profile-dropdown">
-          <button className="profile-dropbtn">Profile</button>
+          <button className="profile-dropbtn">
+            {/* ถ้ามีรูปโปรไฟล์จะแสดงรูป ถ้าไม่มีก็แสดง placeholder */}
+            <img 
+              src={profileImage || "/images/placeholder-profile.png"} 
+              alt="Profile" 
+              className="profile-image" 
+            />
+          </button>
           <div className="profile-dropdown-content">
             <Link to="/profile">My Account</Link>
             <Link to="/login">Log in</Link>
@@ -70,37 +178,43 @@ function MainPage() {
         </div>
       </header>
 
-      {/* ส่วนของข้อมูล COVID */}
       <div className="covid-data-section">
-        {loading && <p>กำลังโหลดข้อมูล...</p>} {/* แสดงข้อความเมื่อข้อมูลกำลังถูกโหลด */}
-        {error && <p className="error">{error}</p>} {/* แสดงข้อความข้อผิดพลาดหากมี */}
+        {loading && <p>กำลังโหลดข้อมูล...</p>}
+        {error && <p className="error">{error}</p>}
 
-        <h2>ข้อมูล COVID</h2>
+        {!loading && !error && (
+          <>
+            <h2>ข้อมูล COVID</h2>
 
-        {/* แสดงข้อมูล COVID ที่ถูก fetch มา */}
-        {covidData.length > 0 ? (
-          <ul>
-            {covidData.map((data, index) => (
-              <li key={index}>
-                <p>ปี: {data.year}</p> {/* แสดงปี */}
-                <p>อาทิตย์: {data.weeknum}</p> {/* แสดงอาทิตย์ */}
-                <p>จังหวัด: {data.province}</p> {/* แสดงจังหวัด */}
-                {data.image && (
-                  <img
-                    src={data.image}
-                    alt={`ข้อมูล COVID สำหรับ ${data.province}`}
-                    className="covid-image"
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          !loading && <p>ไม่มีข้อมูลที่พร้อมใช้งาน</p> // แสดงข้อความหากไม่มีข้อมูลและข้อมูลไม่กำลังโหลด
+            {/* แสดงกราฟ 3 กราฟ */}
+            <h3>กราฟแสดงจำนวนผู้ป่วยรายใหม่ในแต่ละสัปดาห์ของแต่ละระลอก</h3>
+            <Line data={prepareChartData(covidData.round1to2)} options={chartOptions} />
+
+            <h3>กราฟแสดงจำนวนผู้ป่วยสะสมในแต่ละปี</h3>
+            <Line data={prepareChartData(covidData.round3)} options={chartOptions} />
+
+            <h3>กราฟแสดงจำนวนผู้ป่วยรายใหม่และสะสมในรอบ 4</h3>
+            <Line data={prepareChartData(covidData.round4)} options={chartOptions} />
+
+            {/* Modal แสดงข้อมูลเชิงลึกเมื่อคลิกที่กราฟ */}
+            {selectedData && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setSelectedData(null)}>&times;</span>
+                  <h3>ข้อมูลเพิ่มเติม</h3>
+                  <p><strong>ปี:</strong> {selectedData.year}</p>
+                  <p><strong>สัปดาห์:</strong> {selectedData.weeknum}</p>
+                  <p><strong>จำนวนผู้ป่วยรายใหม่:</strong> {selectedData.new_cases}</p>
+                  <p><strong>จำนวนผู้ป่วยสะสม:</strong> {selectedData.cumulative_cases}</p>
+                  <p><strong>จังหวัด:</strong> {selectedData.province}</p>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
   );
 }
 
-export default MainPage; // ส่งออก component MainPage
+export default MainPage;

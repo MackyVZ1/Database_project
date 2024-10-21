@@ -1,149 +1,148 @@
 /* personalPage.css */
 
 .personal-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  .personal-page .header {
-    background-color: #f28b82;
-    padding: 10px;
-    text-align: left;
-    font-size: 24px;
-    color: white;
-  }
-  
-  .personal-page .header h1 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .personal-page .content {
-    display: flex;
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  /* Sidebar */
-  .personal-page .sidebar {
-    width: 220px;
-    background-color: #f1f1f1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-right: 1px solid #ccc;
-  }
-  
-  .personal-page .profile-icon {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .personal-page .profile-icon img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #646cff;
-    margin-bottom: 10px;
-  }
-  
-  .personal-page .profile-icon input[type="file"] {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .personal-page .menu {
-    text-align: left;
-    width: 100%;
-  }
-  
-  .personal-page .menu p {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  .personal-page .menu ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .personal-page .menu li {
-    margin-bottom: 15px;
-  }
-  
-  .personal-page .menu a {
-    font-size: 18px;
-    color: #007bff;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .personal-page .menu a:hover {
-    background-color: #e9e9e9;
-  }
-  
-  /* Main content */
-  .personal-page .main-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-  
-  /* Form styling */
-  .personal-page .form {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    grid-gap: 15px;
-    align-items: center;
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .personal-page input[type="text"], 
-  .personal-page input[type="number"], 
-  .personal-page select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .personal-page input[type="number"] {
-    max-width: 100px;
-  }
-  
-  .personal-page label {
-    text-align: right;
-    padding-right: 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .personal-page button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-  }
-  
-  .personal-page button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.personal-page .header {
+  background-color: #f28b82;
+  padding: 10px;
+  text-align: left;
+  font-size: 24px;
+  color: white;
+}
+
+.personal-page .header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.personal-page .content {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Sidebar */
+.personal-page .sidebar {
+  width: 220px;
+  background-color: #f1f1f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #ccc;
+}
+
+.personal-page .profile-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.personal-page .profile-icon img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #646cff;
+  margin-bottom: 10px;
+}
+
+.personal-page .profile-icon input[type="file"] {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.personal-page .menu {
+  text-align: left;
+  width: 100%;
+}
+
+.personal-page .menu p {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.personal-page .menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.personal-page .menu li {
+  margin-bottom: 15px;
+}
+
+.personal-page .menu a {
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.personal-page .menu a:hover {
+  background-color: #e9e9e9;
+}
+
+/* Main content */
+.personal-page .main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Form styling */
+.personal-page .form {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 15px;
+  align-items: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+.personal-page input[type="text"], 
+.personal-page input[type="number"], 
+.personal-page select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.personal-page input[type="number"] {
+  max-width: 100px;
+}
+
+.personal-page label {
+  text-align: right;
+  padding-right: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.personal-page button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.personal-page button:hover {
+  background-color: #0056b3;
+}

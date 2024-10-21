@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LogoutPopup from './LogoutPopup';
 import './App.css';
+import './personal.css';
 
 function PersonalPage() {
   // กำหนด state ต่าง ๆ สำหรับเก็บข้อมูลของผู้ใช้
@@ -23,7 +24,7 @@ function PersonalPage() {
   const navigate = useNavigate(); // ใช้สำหรับนำทางไปยังหน้าอื่น
 
   // URL ของ API ที่ถูกดึงจาก environment variables
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = 'http://localhost:5000/api';
 
   // ฟังก์ชันสำหรับอัปโหลดรูปโปรไฟล์
   const handleImageChange = (e) => {

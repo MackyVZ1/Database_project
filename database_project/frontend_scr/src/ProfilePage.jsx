@@ -5,7 +5,7 @@ import axios from 'axios'; // Import axios
 import './App.css'; // Import your CSS
 import './profile.css';
 
-const apiUrl = import.meta.env.VITE_API_URL; // Use environment variable
+const apiUrl = 'http://localhost:5000/api'; // Use environment variable
 
 function ProfilePage() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false); // State for showing popup

@@ -14,7 +14,7 @@ function RegisterPage() {
   const [successMessage, setSuccessMessage] = useState(''); // สำหรับเก็บข้อความสำเร็จ
 
   // URL API ที่จะใช้ส่งข้อมูล
-  const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable เช่นเดียวกับหน้า PersonalPage
+  const apiUrl = 'http://localhost:5000/api'; // ใช้ environment variable เช่นเดียวกับหน้า PersonalPage
 
   // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
   const handleSubmit = async (e) => {

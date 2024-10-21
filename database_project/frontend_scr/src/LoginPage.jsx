@@ -4,7 +4,7 @@ import axios from 'axios'; // นำเข้า axios
 import './App.css'; // นำเข้า CSS ที่คุณรวมไว้
 import './login.css';
 
-const apiUrl = import.meta.env.VITE_API_URL; // ใช้ environment variable
+const apiUrl = 'http://localhost:5000/api';  // ใช้ environment variable
 
 function LoginPage() {
   const [username, setUsername] = useState('');

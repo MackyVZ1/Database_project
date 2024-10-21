@@ -1,45 +1,70 @@
-/* profile.css */
-.profile-container {
-    padding: 10px;
-  }
-  
-  .profile-header {
-    text-align: center;
-  }
-  
-  .profile-info {
-    background-color: #f1f1f1;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .profile-info h2 {
-    margin-bottom: 10px;
-  }
-  
-  .profile-info p {
-    font-size: 18px;
-    margin: 8px 0;
-  }
-  
-  .profile-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .action-button {
-    padding: 10px 20px;
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .action-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Additional profile-specific styles can go here */
-  
+/* profilePage.css */
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  background-color: #f28b82;
+  color: black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header h1 {
+  margin: 0;
+}
+
+.profile-content {
+  display: flex;
+  height: calc(100vh - 50px);
+}
+
+.profile-sidebar {
+  background-color: #f9f9f9;
+  width: 200px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-icon img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-sidebar-menu p {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.profile-sidebar-menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+}
+
+.profile-sidebar-menu a:hover {
+  color: #646cff;
+}
+
+.profile-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.profile-main h2 {
+  margin-top: 0;
+}
