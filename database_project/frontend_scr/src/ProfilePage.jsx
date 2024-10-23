@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import LogoutPopup from './LogoutPopup'; // Import LogoutPopup
 import axios from 'axios'; // Import axios
-import './App.css'; // Import your CSS
+import './App.css';
 import './profile.css';
 
 const apiUrl = 'http://localhost:5000/api'; // Use environment variable
@@ -33,7 +33,7 @@ function ProfilePage() {
       }); // Save user data in state
     } catch (error) {
       console.error('Error fetching user data:', error);
-      setUserData({ username: 'Error loading user data', loginHistory: [] }); // Set error state
+      setUserData({ username: 'Username', loginHistory: [] }); // Set error state
     }
   };
 

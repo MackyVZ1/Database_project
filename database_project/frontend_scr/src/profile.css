@@ -1,70 +1,162 @@
-/* profilePage.css */
-
+/* ProfilePage */
 .profile-page {
   display: flex;
   flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: #ffffff; /* White background */
+  margin: 0; /* Remove margin */
+  padding: 0; /* Remove padding */
+  box-sizing: border-box; /* Include padding and border in element size */
 }
 
-.profile-header {
-  background-color: #f28b82;
-  color: black;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Header */
+.profile-page .header {
+  background-color: #f28b82; /* Header background color */
+  width: 100%; /* Full width */
+  height: 60px; /* Header height */
+  display: flex; /* Flex for layout */
+  align-items: center; /* Vertical alignment */
+  padding-left: 20px; /* Left padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Header shadow */
+  margin: 0 auto; /* Centered on screen */
 }
 
-.profile-header h1 {
-  margin: 0;
+/* Site Name */
+.profile-page .header h1 {
+  font-size: 24px; /* Font size */
+  color: white; /* Text color */
+  margin: 0; /* Remove margin */
+  flex-grow: 1; /* Fill remaining space */
 }
 
-.profile-content {
-  display: flex;
-  height: calc(100vh - 50px);
+/* Content Layout */
+.profile-page .profile-content {
+  display: flex; /* Flex for layout */
+  flex-grow: 1; /* Fill remaining space */
+  padding: 20px; /* Optional padding */
+  width: 100%; /* Full width */
+  overflow: hidden; /* Prevent horizontal scrolling */
 }
 
-.profile-sidebar {
-  background-color: #f9f9f9;
-  width: 200px;
-  padding: 20px;
-  border-right: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Sidebar */
+.profile-page .profile-sidebar {
+  width: 280px; /* Sidebar width */
+  background-color: #f9f9f9; /* Light background for contrast */
+  padding: 20px; /* Padding */
+  display: flex; /* Flex for layout */
+  flex-direction: column; /* Vertical arrangement */
+  align-items: flex-start; /* Align items to the start */
+  border-right: 1px solid #ccc; /* Right border */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  overflow-y: auto; /* Scrollable when content is too long */
 }
 
-.profile-icon img {
-  border-radius: 50%;
-  margin-bottom: 20px;
+/* Profile Icon Styling */
+.profile-page .profile-icon {
+  text-align: center;
+  margin-bottom: 20px; /* Margin below */
 }
 
-.profile-sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.profile-page .profile-icon img {
+  width: 100px; /* Profile image size */
+  height: 100px; /* Maintain aspect ratio */
+  border-radius: 50%; /* Circular image */
+  border: 2px solid #646cff; /* Image border */
+  margin-bottom: 10px; /* Margin below */
+  transition: transform 0.3s; /* Smooth scaling on hover */
 }
 
-.profile-sidebar-menu p {
-  font-size: 1.2rem;
-  margin: 0;
-  font-weight: bold;
+.profile-page .profile-icon img:hover {
+  transform: scale(1.05); /* Scale on hover */
 }
 
-.profile-sidebar-menu a {
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
+/* Profile Sidebar Menu */
+.profile-page .profile-sidebar-menu {
+  display: flex; /* Flexbox for layout */
+  flex-direction: column; /* Vertical arrangement */
+  align-items: center; /* Center items horizontally */
+  width: 100%; /* Full width of sidebar */
+  padding: 0; /* No additional padding */
 }
 
-.profile-sidebar-menu a:hover {
-  color: #646cff;
+.profile-page .profile-sidebar-menu p {
+  margin: 0 0 10px 0; /* Remove margin and add bottom space */
+  font-weight: bold; /* Bold username */
+  color: black; /* Text color */
+  text-align: center; /* Center text */
 }
 
-.profile-main {
-  flex: 1;
-  padding: 20px;
+.profile-page .profile-sidebar-menu a {
+  text-decoration: none; /* Remove underline from links */
+  color: black; /* Text color */
+  margin: 0 0 10px 0; /* Spacing between links */
+  text-align: center; /* Center text */
 }
 
-.profile-main h2 {
-  margin-top: 0;
+.profile-page .profile-sidebar-menu a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.profile-page .profile-sidebar-menu button {
+  margin-top: 10px; /* Space above the button */
+  padding: 10px; /* Button padding */
+  background-color: #007bff; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.profile-page .profile-sidebar-menu button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Main content */
+.profile-page .profile-main {
+  flex-grow: 1; /* Fill remaining space */
+  padding: 20px; /* Padding */
+  background-color: #fff; /* Background color */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Shadow */
+  border-radius: 10px; /* Rounded corners */
+  overflow-y: auto; /* Scrollable when content is too long */
+}
+
+/* Title styling */
+.profile-page .profile-main h2 {
+  margin-bottom: 20px; /* Margin below */
+}
+
+/* Login history styling */
+.profile-page .profile-main ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.profile-page .profile-main li {
+  padding: 5px 0; /* Padding between items */
+  border-bottom: 1px solid #ccc; /* Border between items */
+}
+
+/* Message when no history */
+.profile-page .profile-main p {
+  color: #666; /* Text color */
+  font-style: italic; /* Italic style */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-page .profile-content {
+    flex-direction: column; /* Change to vertical layout on small screens */
+  }
+
+  .profile-page .profile-sidebar {
+    width: 100%; /* Full width on small screens */
+    border-right: none; /* Remove right border */
+    border-bottom: 1px solid #ccc; /* Add bottom border */
+  }
+
+  .profile-page .profile-main {
+    padding: 15px; /* Reduced padding on small screens */
+  }
 }

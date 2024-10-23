@@ -10,6 +10,7 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [rememberMe, setRememberMe] = useState(false); // สร้าง state สำหรับ checkbox
   const navigate = useNavigate();
 
   // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
@@ -24,7 +25,7 @@ function LoginPage() {
 
     try {
       // ทำการเรียก API เพื่อลงชื่อเข้าใช้
-      const response = await axios.post(`${apiUrl}/login`, { // ใช้ environment variable
+      const response = await axios.post(`${apiUrl}/login`, {
         username,
         password, // ส่งข้อมูลเป็น JSON
       });
@@ -64,10 +65,25 @@ function LoginPage() {
           required
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>} {/* แสดงข้อความผิดพลาด */}
+
+        {/* Flex container for checkbox and message */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', whiteSpace: 'nowrap' }}>
+          <input
+            type="checkbox"
+            id="rememberMe"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+            style={{ marginRight: '8px', transform: 'scale(1.2)', marginTop: '2px' }} // ปรับขนาด checkbox และเลื่อนขึ้นเล็กน้อย
+          />
+          <label htmlFor="rememberMe" style={{ margin: 0, lineHeight: 'normal' }}>
+            โปรดตรวจสอบให้แน่ใจว่าชื่อผู้ใช้และรหัสผ่านถูกต้องก่อนเข้าสู่ระบบ
+          </label>
+        </div>
+
+
         <button type="submit">ลงชื่อเข้าใช้</button>
       </form>
       <p>ไม่มีบัญชีผู้ใช้? <Link to="/register">คลิกที่นี่เพื่อสมัคร</Link></p>
-      <p>โปรดตรวจสอบให้แน่ใจว่าชื่อผู้ใช้และรหัสผ่านถูกต้องก่อนเข้าสู่ระบบ</p> {/* ข้อความแนะนำ */}
     </div>
   );
 }

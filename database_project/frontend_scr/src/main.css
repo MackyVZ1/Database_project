@@ -1,31 +1,39 @@
-/* mainPage.css */
 
+
+/* MainPage CSS */
 .main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100vw; /* ทำให้ container ขยายเต็มความกว้างของหน้าจอ */
+  height: 100vh; /* ทำให้ container ขยายเต็มความสูงของหน้าจอ */
+  box-sizing: border-box; /* เพื่อให้ padding ไม่ทำให้ container เกินขอบ */
 }
 
+/* Header */
 .header {
-  width: 300%;
+  position: relative; /* ทำให้สามารถใช้งานตำแหน่งแบบ absolute ในลูกของ header ได้ */
+  width: 100%; /* ขยายให้เต็มหน้าจอ */
   text-align: center;
   background-color: #ff6b6b;
-  padding: 10px;
+  padding: 20px;
   color: white;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .chart-section {
   display: flex;
-  justify-content: left;
+  justify-content: center; /* Center chart section horizontally */
   margin-bottom: 20px;
+  width: 100%; /* ให้เต็มความกว้างของหน้าจอ */
 }
 
 .chart-image {
-  width: 600px;
+  width: 100%; /* ขยายรูปกราฟให้เต็มพื้นที่ที่มีอยู่ */
+  max-width: 800px; /* จำกัดความกว้างสูงสุดเพื่อไม่ให้เกิน 800px */
   height: auto;
   border: 2px solid #000;
 }
@@ -35,7 +43,8 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  width: 100%;
+  width: 100%; /* ขยายให้เต็มความกว้าง */
+  max-width: 1200px; /* จำกัดความกว้างสูงสุดเพื่อความสวยงาม */
   text-align: right;
   background-color: #f1f1f1;
   border-radius: 10px;
@@ -52,4 +61,52 @@
   text-align: center;
   font-size: 18px;
   margin-top: 20px;
+  width: 100%; /* ขยายให้เต็มหน้าจอ */
+}
+
+/* Dropdown Profile */
+.profile-dropdown {
+  position: absolute; /* ตำแหน่งสัมพันธ์กับ header */
+  bottom: 10px; /* ติดขอบล่างของ header */
+  right: 10px; /* ติดขอบขวาของ header */
+  font-size: 16px;
+}
+
+.profile-dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* ให้ dropdown โผล่ขึ้นจากปุ่ม */
+  right: 0; /* ชิดขอบขวาของปุ่ม dropdown */
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.profile-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.profile-dropdown:hover .profile-dropdown-content {
+  display: block;
+}
+
+.profile-dropdown:hover .profile-dropbtn {
+  background-color: #3e8e41;
+}
+
+.profile-dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }

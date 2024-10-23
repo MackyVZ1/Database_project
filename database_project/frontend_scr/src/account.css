@@ -1,43 +1,244 @@
-/* accountPage.css */
 
+
+/* AccountPage */
 .account-page {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-  }
-  
-  .account-page h2 {
-    color: #ff6b6b;
-    margin-bottom: 20px;
-  }
-  
-  .account-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  .account-form label {
-    font-weight: bold;
-  }
-  
-  .account-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .account-form button {
-    padding: 10px;
-    background-color: #646cff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .account-form button:hover {
-    background-color: #535bf2;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* ใช้ความสูงเต็มหน้าจอ */
+  width: 100vw; /* ใช้ความกว้างเต็มหน้าจอ */
+  background-color: #ffffff; /* พื้นหลังสีขาว */
+  margin: 0; /* ลบ margin */
+  padding: 0; /* ลบ padding */
+  box-sizing: border-box; /* ให้ padding และ border อยู่ภายในขนาดของ element */
+}
+
+.account-page .header {
+  background-color: #f28b82;
+  width: 100%; /* ขยายให้เต็มความกว้าง */
+  max-width: 1200px; /* จำกัดความกว้างสูงสุดเพื่อความสวยงาม */
+  height: 60px; /* กำหนดความสูงของ header */
+  display: flex; /* ใช้ flex เพื่อจัดตำแหน่ง */
+  align-items: center; /* จัดแนวแนวตั้ง */
+  padding-left: 20px; /* เพิ่ม padding ด้านซ้าย */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เงาใต้ header */
+  margin: 0 auto; /* จัดให้อยู่กลางหน้าจอ */
+}
+
+.account-page .header .site-name {
+  font-size: 24px; /* ขนาดตัวอักษร */
+  color: white; /* สีของข้อความ */
+  margin: 0; /* ลบ margin */
+  flex-grow: 1; /* ทำให้พื้นที่ว่างที่เหลือถูกแบ่ง */
+}
+
+/* การจัดการ layout ของเนื้อหาภายใน */
+.account-page .content {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px; /* สามารถลด padding เพื่อใช้พื้นที่ให้มากขึ้น */
+  width: 96%; /* ปรับเป็น 100% */
+  overflow: hidden; /* ป้องกันการเลื่อนซ้าย-ขวา */
+}
+
+/* Sidebar */
+.account-page .sidebar {
+  width: 280px; /* Sidebar width */
+  background-color: #f9f9f9; /* Light background for contrast */
+  padding: 20px; /* Padding */
+  display: flex; /* Flex for layout */
+  flex-direction: column; /* Arrange items vertically */
+  align-items: flex-start; /* Align items to the start */
+  border-right: 1px solid #ccc; /* Right border */
+  box-sizing: border-box; /* Include padding in width */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Profile Icon Styling */
+.account-page .profile-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.account-page .profile-icon img {
+  width: 100px; /* Profile image size */
+  height: 100px;
+  border-radius: 50%; /* Circular image */
+  border: 2px solid #646cff; /* Image border */
+  margin-bottom: 10px;
+  transition: transform 0.3s; /* Smooth scaling on hover */
+}
+
+.account-page .profile-icon img:hover {
+  transform: scale(1.05); /* Scale on hover */
+}
+
+.account-page .profile-icon input[type="file"] {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Profile Sidebar Menu */
+.account-page .profile-sidebar-menu {
+  display: flex;               /* Flexbox for layout */
+  flex-direction: column;      /* Arrange items vertically */
+  align-items: center;         /* Center items horizontally */
+  width: 100%;                 /* Full width of sidebar */
+  padding: 0;                  /* No additional padding */
+}
+
+.account-page .profile-sidebar-menu p {
+  margin: 0 0 10px 0;         /* Remove margin and add bottom space */
+  font-weight: bold;           /* Bold username */
+  color: black;                /* Change text color to black */
+  text-align: center;          /* Center text */
+}
+
+.account-page .profile-sidebar-menu a {
+  text-decoration: none;       /* Remove underline from links */
+  color: black;                /* Change link color to black */
+  margin: 0 0 10px 0;         /* Spacing between links */
+  text-align: center;          /* Center text */
+}
+
+.account-page .profile-sidebar-menu a:hover {
+  text-decoration: underline;  /* Underline on hover */
+}
+
+.account-page .profile-sidebar-menu button {
+  margin-top: 10px;           /* Space above the button */
+  padding: 10px;              /* Button padding */
+  background-color: #007bff;  /* Button color */
+  color: white;               /* Button text color */
+  border: none;               /* No border */
+  border-radius: 5px;        /* Rounded corners */
+  cursor: pointer;            /* Pointer cursor */
+}
+
+.account-page .profile-sidebar-menu button:hover {
+  background-color: #0056b3;  /* Darker blue on hover */
+}
+
+/* Menu styling */
+.account-page .menu {
+  text-align: left;
+  width: 50%; /* ทำให้กว้างเท่ากับเมนูใน PersonalPage */
+}
+
+.account-page .menu p {
+  font-size: 18px; /* ลดขนาดข้อความ */
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.account-page .menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.account-page .menu li {
+  margin-bottom: 15px;
+}
+
+.account-page .menu a {
+  font-size: 16px; /* ลดขนาดข้อความ */
+  color: #007bff;
+  text-decoration: none;
+  display: block;
+  padding: 10px; /* ลด padding */
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.account-page .menu a:hover {
+  background-color: #e9e9e9;
+}
+
+/* ส่วนหลักของหน้า */
+.account-page .main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* จัดฟอร์มไปทางด้านซ้าย */
+  max-width: 900px;
+  margin: 0 auto; /* ขจัด margin ด้านบนให้ฟอร์มขึ้นไป */
+  padding-top: 0; /* ลด padding ด้านบนเพื่อให้ฟอร์มชิดด้านบนมากขึ้น */
+}
+
+/* การจัดวางฟอร์ม */
+.account-page .form {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* จัด 2 คอลัมน์สำหรับ label และ input */
+  grid-gap: 10px 20px; /* ระยะห่างระหว่างป้ายชื่อและช่องกรอก */
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.account-page label {
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  font-weight: normal;
+  padding-right: 10px;
+}
+
+.account-page input[type="text"],
+.account-page input[type="email"],
+.account-page input[type="password"],
+.account-page select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+/* เมื่อผู้ใช้คลิก input ให้เปลี่ยนสี border */
+.account-page input[type="text"]:focus,
+.account-page input[type="email"]:focus,
+.account-page input[type="password"]:focus,
+.account-page select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* ปรับสไตล์ปุ่มให้เรียบง่าย */
+.account-page button {
+  grid-column: 2 / 3; /* ปุ่มให้ชิดซ้ายใต้ input */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* เว้นระยะระหว่างฟอร์มกับปุ่ม */
+  width: 100%;
+  max-width: 150px;
+  justify-self: start;
+}
+
+.account-page button:hover {
+  background-color: #0056b3;
+}
+
+/* Additional info styling */
+.account-page .additional-info {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+  color: #666;
+  max-width: 100%; /* ให้กว้างสุดเพื่อไม่ให้เลื่อน */
+}

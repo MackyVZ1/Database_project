@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // นำเข้า axios สำหรับทำ HTTP requests
-import './App.css'; 
+import './App.css';
 import './register.css';
 
 function RegisterPage() {
@@ -19,7 +19,7 @@ function RegisterPage() {
   // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // ตรวจสอบว่ารหัสผ่านตรงกันหรือไม่
     if (password !== confirmPassword) {
       setErrorMessage('รหัสผ่านไม่ตรงกัน');
@@ -47,7 +47,7 @@ function RegisterPage() {
         // ถ้าลงทะเบียนสำเร็จ
         setSuccessMessage('ลงทะเบียนสำเร็จ!'); // แสดงข้อความสำเร็จ
         setErrorMessage(''); // ล้างข้อความข้อผิดพลาด (ถ้ามี)
-        
+
         // ล้างฟิลด์ข้อมูลหลังจากลงทะเบียน
         setEmail('');
         setUsername('');
@@ -103,19 +103,24 @@ function RegisterPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <label>
+
+        {/* Flex container for checkbox and confirmation */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px', whiteSpace: 'nowrap' }}>
           <input
             type="checkbox"
             checked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
-          /> ข้อมูลของข้าพเจ้าเป็นความจริง
-        </label>
+            style={{ marginRight: 0, transform: 'scale(1.2)' }} // Set marginRight to 0 to minimize space
+          />
+          <label style={{ marginRight: '150px' }}>ข้อมูลของข้าพเจ้าเป็นความจริง</label> {/* Remove margin from label */}
+        </div>
+
         <button type="submit">สมัคร</button>
       </form>
 
       {/* แสดงข้อความข้อผิดพลาด */}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      
+
       {/* แสดงข้อความสำเร็จ */}
       {successMessage && <p className="success-message">{successMessage}</p>}
 
