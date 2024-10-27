@@ -39,7 +39,7 @@ const Mainpage = () => {
     const nav = useNavigate()
 
     // API and data fetching
-    const apiURL = "https://databasebackend-8tysim51m-veerapats-projects.vercel.app"
+    const apiURL = "https://back-lwoi593zw-veerapats-projects.vercel.app/api"
 
     const fetchCovidData = async (selectedYear) => {
         try {
