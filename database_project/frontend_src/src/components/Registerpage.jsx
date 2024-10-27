@@ -15,7 +15,7 @@ const Registerpage = () => {
     const [successMessage, setSuccessMessage] = useState(''); // สำหรับเก็บข้อความสำเร็จ
 
     // URL API ที่จะใช้ส่งข้อมูล
-    const apiUrl = 'http://localhost:5000/api'; // ใช้ environment variable เช่นเดียวกับหน้า PersonalPage
+    const apiUrl = 'https://databasebackend-8tysim51m-veerapats-projects.vercel.app'; // ใช้ environment variable เช่นเดียวกับหน้า PersonalPage
 
     // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
     const handleSubmit = async (e) => {
