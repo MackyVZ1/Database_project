@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./MainPage.css";
+import "./Mainpage.css";
 import axios from 'axios'
 import { LineChart } from '@mui/x-charts/LineChart';
 import "./Registerpage.jsx"
