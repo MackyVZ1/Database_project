@@ -9,8 +9,8 @@ const port = process.env.port || 5000; // เช็คว่าถ้าหา p
 const app = express();
 
 app.use(cors({
-    orgin:'https://yippy.vercel.app/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // ระบุเมธอดที่อนุญาต
+    orgin:'*',
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // ระบุเมธอดที่อนุญาต
 }))
 
 // กำหนด middleware ,รับข้อมูลแบบ JSON; Body parse

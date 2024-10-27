@@ -50,7 +50,7 @@ router.get('/userList', (req, res) => {
     db.query("SELECT username, email, isOnline FROM userDatabase ORDER BY isOnline DESC", (err, results) =>{
         // ถ้าเกิด error ขึ้น
         if(err){
-            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกใช้ข้อมูลผู้ใช้ทั้งหมด"});
+            res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกใช้ข้อมูลผู้ใช้ทั้งหมด"}, err);
             console.log(err)
         }
         // ส่งข้อมูลกลับเป็น .JSON ; เอา results ไปใช้ต่อเลย
