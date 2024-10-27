@@ -15,7 +15,7 @@ const Registerpage = () => {
     const [successMessage, setSuccessMessage] = useState(''); // สำหรับเก็บข้อความสำเร็จ
 
     // URL API ที่จะใช้ส่งข้อมูล
-    const apiUrl = 'https://database-project-one.vercel.app/api';
+    const apiUrl = 'https://databasebackend.vercel.app/api';
 
     // ฟังก์ชันสำหรับการส่งข้อมูลลงทะเบียน
     const handleSubmit = async (e) => {
