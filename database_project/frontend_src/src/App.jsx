@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-import Mainpage from './components/mainPage';
+import Mainpage from './components/Mainpage';
 import Registerpage from './components/Registerpage';
 import Profile from './components/Profile';
 
