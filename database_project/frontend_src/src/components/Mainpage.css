@@ -1,0 +1,256 @@
+.signdiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: #00a650;
+    padding: 10px 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+/* Style for the button inside green bar */
+.signdiv button {
+    float: right;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.signdiv button:hover {
+    background-color: rgb(244, 244, 244);
+    color: #00a650;
+}
+
+/* Add padding to body to account for fixed header */
+body {
+    padding-top: 60px; /* Adjust this value based on your header height */
+}
+
+/* Hide header on scroll down, show on scroll up */
+.signdiv.hidden {
+    transform: translateY(-100%);
+}
+
+/* User menu styles */
+.user-menu {
+    float: right;
+    color: white;
+    position: relative;
+}
+
+.user-menu span {
+    padding-right: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-style: italic;
+    background-color:#00a650;
+
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.874);
+    border-radius: 4px;
+    padding: 5px 0;
+}
+
+.user-menu:hover .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 15;
+}
+
+.dropdown-menu button:hover {
+    background-color: #fafafaa2;
+}
+.topdiv{
+    text-align: center;
+    padding: 5px;
+}
+
+.topText1{
+    font-size: 38px;
+    font-weight: bold;
+    color: #00a650;
+    text-shadow: 2px 2px rgb(239, 239, 6);
+}
+
+.topText2{
+    font-size: larger;
+    font-weight: 600;
+}
+
+.covidTitle{
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.covid19div1 {
+    text-align: center;
+}
+
+.covid19div1 select{
+    text-align: center;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #00a650;
+    padding: 15px;
+    outline: none;
+    font-size: 16px;
+}
+
+.covid19div2{
+    display: flex;
+    margin-top: 15px;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10px;
+
+}
+
+
+.covid19line1{
+    border: 1px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    width: 500px;
+    height: max-content;
+}
+
+.covid19line2{
+    border: 1px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    width: max-content;
+    height: max-content;
+}
+
+
+
+.userlistdiv {
+    overflow-y:auto;
+    width: 500px;
+    display: flex; 
+    justify-content:baseline; /* จัดให้อยู่ตรงกลางแนวนอน */
+    align-items:center; /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    flex-direction: column; /* จัดการเลย์เอาท์ให้แสดงผลจากบนลงล่าง */
+    text-align: center;
+}
+
+.userlistdiv input{
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.userlistdiv p{
+    padding: 20px;
+    font-size: 18px;
+}
+
+
+.userlistdiv table {
+    width: 70%;
+    border: 2px solid;
+    border-collapse: collapse;
+}
+
+.userlistdiv th {
+    color: white;
+    padding: 6px;
+    background-color: black;
+    font-size: 12px;
+}
+
+.userlistdiv td {
+    padding: 6px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+.popup {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-inner {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-inner input {
+    width: 90%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.popup-inner button {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00a650;
+    color: white;
+    cursor: pointer;
+}
+
+.popup-inner button:hover {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #00a650;
+    border: 1px solid #00a650;
+    background-color: rgb(250, 250, 250);
+    transition: all 0.3s ease;
+}
+

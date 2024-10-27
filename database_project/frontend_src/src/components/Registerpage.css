@@ -1,0 +1,125 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    align-items: center;
+    /* จัดให้อยู่ตรงกลางแนวนอน */
+    width: 100vw;
+    /* ขยายเต็มความกว้างของหน้าจอ */
+    height: 80vh;
+    /* ขยายเต็มความสูงของหน้าจอ */
+    padding: 20px;
+    box-sizing: border-box;
+    /* ให้ padding รวมอยู่ในความกว้าง */
+    flex-direction: column;
+    /* จัด content ให้เป็นคอลัมน์ */
+}
+
+.register-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    /* ขนาดตัวหนังสือ */
+    font-weight: 800;
+    margin-bottom: 20px;
+    /* เพิ่มระยะห่างจากฟิลด์ */
+}
+
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* ขยายฟอร์มให้กว้างเท่ากับ container */
+    max-width: 400px;
+    /* จำกัดความกว้างฟอร์ม */
+}
+
+.register-container input {
+    width: 100%;
+    /* ทำให้ input ขยายเต็มที่ */
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* สำหรับปุ่ม */
+.register-container button {
+    width: 100%;
+    /* ทำให้ปุ่มกว้างเต็มฟอร์ม */
+    padding: 10px;
+    background-color:#00a650;
+    /* เปลี่ยนสีปุ่ม */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.register-container button:hover {
+    color: #00a650;
+    background-color: white;
+    border: 1px solid #00a650;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    /* สีเมื่อเอาเมาส์ไปจิ้ม */
+}
+
+.register-container .login-link {
+    margin: 15px 0;
+    /* เพิ่มระยะห่างบนและล่างของลิงก์ */
+    text-align: center;
+    color: #00a650;
+    text-decoration: none;
+}
+
+.register-container .login-link:hover {
+    text-decoration: underline;
+}
+
+/* ข้อความเตือน */
+.register-container .warning-text {
+    text-align: center;
+    font-size: 1rem;
+    /* ขนาดตัวหนังสือสำหรับข้อความล่าง */
+    margin-top: 10px;
+    /* เพิ่มระยะห่างด้านบน */
+    color: #333;
+    /* สีข้อความ */
+}
+
+/* ทำให้ checkbox และข้อความอยู่ในบรรทัดเดียวกัน */
+.checkbox-container {
+    display: inline-flex;
+    /* จัดวาง checkbox และข้อความในบรรทัดเดียวกัน */
+    align-items: center;
+    /* จัดให้อยู่ตรงกลางแนวตั้งเดียวกัน */
+    margin-bottom: 15px;
+    /* เพิ่มระยะห่างจากฟิลด์ก่อนหน้า */
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 4px;
+    /* ลดระยะห่างระหว่าง checkbox กับข้อความ */
+    transform: scale(1.2);
+    /* เพิ่มขนาด checkbox ถ้าต้องการ */
+}
+
+.checkbox-container label {
+    font-size: 1rem;
+    /* ขนาดตัวอักษรสำหรับข้อความ */
+    margin: 0;
+    /* เอา margin ออก เพื่อให้ชิดกับ checkbox */
+    line-height: 1.5;
+    /* ปรับความสูงของบรรทัดเพื่อให้ข้อความตรงกับ checkbox */
+}
+
+.error-message {
+    color: red;
+}
+
+.success-message {
+    color: rgb(0, 255, 21);
+}
