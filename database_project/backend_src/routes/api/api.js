@@ -5,9 +5,10 @@ const mysql = require('mysql2')
 
 // Create a connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'localdatabase',
+    host: 'becct8wm9kkmgla1znpc-mysql.services.clever-cloud.com', // becct8wm9kkmgla1znpc-mysql.services.clever-cloud.com
+    user: 'uni7obbbmtobdmpz',   // uni7obbbmtobdmpz
+    password:'s9zqbpH6eCR3BU4Ww1gD', // s9zqbpH6eCR3BU4Ww1gD
+    database: 'becct8wm9kkmgla1znpc', // becct8wm9kkmgla1znpc
     port: 3306,
     waitForConnections: true,
     connectionLimit: 20
@@ -29,7 +30,8 @@ db.connect((err) =>{
             bloodtype VARCHAR(5),
             weight float,
             height float,
-            birthdate date
+            birthdate date,
+            isOnline boolean DEFAULT FALSE
         );
     `
     db.query(createQuery, (err, results) => {
@@ -49,6 +51,7 @@ router.get('/userList', (req, res) => {
         // ถ้าเกิด error ขึ้น
         if(err){
             res.status(400).json({msg: "ฐานข้อมูลขัดข้อง, ไม่สามารถเรียกใช้ข้อมูลผู้ใช้ทั้งหมด"});
+            console.log(err)
         }
         // ส่งข้อมูลกลับเป็น .JSON ; เอา results ไปใช้ต่อเลย
         res.json(results);
