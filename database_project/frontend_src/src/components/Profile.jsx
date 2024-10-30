@@ -7,7 +7,7 @@ const Profile = () => {
     const location = useLocation();
     const logUsername = location.state?.logUsername || "";
     const nav = useNavigate();
-    const apiUrl = 'https://backend-ak5kswtuq-veerapats-projects.vercel.app/api';
+    const apiUrl = 'https://database-project-ashy.vercel.app/api';
 
     const [userData, setUserData] = useState({
         username: "",
