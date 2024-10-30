@@ -5,10 +5,10 @@ const mysql = require('mysql2')
 
 // Create a connection
 const db = mysql.createConnection({
-    host: 'becct8wm9kkmgla1znpc-mysql.services.clever-cloud.com', // becct8wm9kkmgla1znpc-mysql.services.clever-cloud.com
-    user: 'uni7obbbmtobdmpz',   // uni7obbbmtobdmpz
-    password:'s9zqbpH6eCR3BU4Ww1gD', // s9zqbpH6eCR3BU4Ww1gD
-    database: 'becct8wm9kkmgla1znpc', // becct8wm9kkmgla1znpc
+    host: 'mysql-veerapat.alwaysdata.net', // becct8wm9kkmgla1znpc-mysql.services.clever-cloud.com
+    user: 'veerapat',   // uni7obbbmtobdmpz
+    password:'Veerapat190746', // s9zqbpH6eCR3BU4Ww1gD
+    database: 'veerapat_localdatabase', // becct8wm9kkmgla1znpc
     port: 3306,
     waitForConnections: true,
     connectionLimit: 20
