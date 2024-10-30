@@ -10,7 +10,7 @@ const app = express();
 
 app.use(cors({
     orgin:'*',
-    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // ระบุเมธอดที่อนุญาต
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // ระบุเมธอดที่อนุญาต
 }))
 
 // กำหนด middleware ,รับข้อมูลแบบ JSON; Body parse
